@@ -19,7 +19,7 @@ GSEObjectMgr::~GSEObjectMgr()
 	}
 }
 
-int GSEObjectMgr::AddObject(float x, float y, float z)
+int GSEObjectMgr::AddObject(float x, float y, float z, float sx, float sy, float sz)
 {
 	//Find empty slot
 	int index = -1;
@@ -32,7 +32,8 @@ int GSEObjectMgr::AddObject(float x, float y, float z)
 
 	if (index >= 0) {
 		m_Objects[index] = new GSEObject();
-		m_Objects[index]->SetSize(x, y, z);
+		m_Objects[index]->SetPos(x, y, z);
+		m_Objects[index]->SetSize(sx, sy, sz);
 		return index;
 	}
 
@@ -52,4 +53,16 @@ bool GSEObjectMgr::DeleteObject(int id)
 
 	std::cout << "Index " << id << " already deleted." << std::endl;
 	return false;
+}
+
+void GSEObjectMgr::DrawAllObjects(Renderer* renderer)
+{
+	for (int i = 0; i < MAX_NUM_OBJECT; ++i) {
+		if (m_Objects[i] != NULL) {
+
+			m_Objects[i]->Draw(renderer);
+
+		}
+	}
+	
 }

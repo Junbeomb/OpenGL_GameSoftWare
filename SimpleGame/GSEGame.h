@@ -9,7 +9,7 @@ public:
 	GSEGame(int windowSizeX, int windowSizeY);
 	~GSEGame();
 
-	void DrawAll();
+	void DrawAll(); 
 
 private:
 	Renderer * m_Renderer;
