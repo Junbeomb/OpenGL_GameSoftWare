@@ -25,6 +25,8 @@ GSEObject::GSEObject()
 	m_forceX = 0.f;
 	m_forceY = 0.f;
 	m_forceZ = 0.f;
+
+	m_type = TYPE_DEFAULT;
 }
 
 GSEObject::~GSEObject()
@@ -97,5 +99,7 @@ void GSEObject::Update(float elapsedTime)
 	m_posX = m_posX + m_velX * t + 0.5f * m_accX * tt;
 	m_posY = m_posY + m_velY * t + 0.5f * m_accY * tt;
 	m_posZ = m_posZ + m_velZ * t + 0.5f * m_accZ * tt;
+
+
 
 }

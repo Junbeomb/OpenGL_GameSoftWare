@@ -1,8 +1,8 @@
 #pragma once
 #include "GSEObject.h"
+#include "GSEGlobal.h"
 #include "Renderer.h"
 
-#define MAX_NUM_OBJECT 1000
 
 class GSEObjectMgr
 {
@@ -15,7 +15,10 @@ public:
 							float mass,
 							float velX, float velY, float velZ,
 							float accX, float accY, float accZ,
-							float forceX, float forceY, float forceZ);
+							float forceX, float forceY, float forceZ,
+							int type);
+
+	void SetObjectVel(int id, float vx, float vy, float vz);
 
 	float m_sizeX, m_sizeY, m_sizeZ = 0.f;
 	float m_posX, m_posY, m_posZ = 0.f;

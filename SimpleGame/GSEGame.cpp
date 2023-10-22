@@ -8,6 +8,16 @@ GSEGame::GSEGame(int windowSizeX, int windowSizeY)
 
 	m_ObjectMgr = new GSEObjectMgr();
 
+	//create hero object
+
+	m_HeroID = m_ObjectMgr->AddObject(0, 0,0,
+		30, 30, 30,
+		1,
+		0, 0, 0,
+		0, 0, 0,
+		0, 0, 0,
+		TYPE_HERO);
+
 	//create test objects
 	for (int i = 0; i < 1000; ++i) {
 		float x = (500.f * (float)rand() / (float)RAND_MAX) - 250.f;
@@ -26,14 +36,21 @@ GSEGame::GSEGame(int windowSizeX, int windowSizeY)
 		float velZ = (10.f * (float)rand() / (float)RAND_MAX) - 5.f;
 
 		float accX = 0.f;
-		float accY = -20.f;
+		float accY = 0.f;
 		float accZ = 0.f;
 		
 		float forceX = 0.f;
 		float forceY = 0.f;
 		float forceZ = 0.f;
 
-		int id = m_ObjectMgr->AddObject(x, y, z, sX, sY, sZ,mass,velX,velY,velZ,accX,accY,accZ,forceX,forceY,forceZ);
+		int id = m_ObjectMgr->AddObject(x, y, z,
+			sX, sY, sZ,
+			mass,
+			velX, velY, velZ,
+			accX, accY, accZ,
+			forceX, forceY, forceZ,
+			TYPE_DEFAULT);
+
 	}
 }
 
@@ -57,4 +74,26 @@ void GSEGame::DrawAll(float elapsedTime)
 		m_ObjectMgr->UpdateAllObjects(elapsedTime);
 		m_ObjectMgr->DrawAllObjects(m_Renderer, elapsedTime);
 	}
+}
+
+void GSEGame::KeyInput(GSEUserInterface* ui)
+{
+	float vx, vy, vz;
+	vx = vy = vz = 0.f;
+	float velAmount = 100.f;
+	if (ui->Is_SP_Arrow_Up_Down()) {
+		vy += velAmount;
+	}
+	if (ui->Is_SP_Arrow_Down_Down()) {
+		vy -= velAmount;
+	}
+	if (ui->Is_SP_Arrow_Right_Down()) {
+		vx += velAmount;
+	}
+	if (ui->Is_SP_Arrow_Left_Down()) {
+		vx -= velAmount;
+	}
+
+	m_ObjectMgr->SetObjectVel(m_HeroID, vx, vy, vz);
+	
 }

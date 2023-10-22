@@ -24,7 +24,8 @@ int GSEObjectMgr::AddObject(float posX, float posY, float posZ,
 													float mass,
 													float velX, float velY, float velZ,
 													float accX, float accY, float accZ,
-													float forceX, float forceY, float forceZ)
+													float forceX, float forceY, float forceZ,
+													int type)
 {
 	//Find empty slot
 	int index = -1;
@@ -50,6 +51,16 @@ int GSEObjectMgr::AddObject(float posX, float posY, float posZ,
 	
 	return index;
 
+}
+
+void GSEObjectMgr::SetObjectVel(int id, float vx, float vy, float vz)
+{
+	if (m_Objects[id] != NULL) {
+		m_Objects[id]->SetVel(vx,vy,vz);
+	}
+	else {
+		//log..
+	}
 }
 
 bool GSEObjectMgr::DeleteObject(int id)

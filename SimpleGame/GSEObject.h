@@ -1,4 +1,5 @@
 #pragma once
+#include "GSEGlobal.h"
 #include "Renderer.h"
 
 class GSEObject
@@ -23,6 +24,8 @@ private:
 	float m_velX, m_velY, m_velZ;
 	float m_accX, m_accY, m_accZ;
 	float m_forceX, m_forceY, m_forceZ = 0.f;
+
+	int m_type = TYPE_DEFAULT;
 
 };
 
