@@ -20,6 +20,8 @@ public:
 
 	void SetObjectVel(int id, float vx, float vy, float vz);
 
+	void AddObjectForce(int id, float x, float y, float z, float elapsedTime);
+
 	float m_sizeX, m_sizeY, m_sizeZ = 0.f;
 	float m_posX, m_posY, m_posZ = 0.f;
 	float m_mass;

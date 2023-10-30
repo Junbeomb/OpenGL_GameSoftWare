@@ -43,7 +43,7 @@ void RenderScene(void)
 	float elapsedTimeInSec = (float)elapsedTime / 1000.f;
 	
 	//sendKey inupts
-	g_game->KeyInput(g_userInterface);
+	g_game->KeyInput(g_userInterface, elapsedTimeInSec);
 
 	g_game->DrawAll(elapsedTimeInSec);
 

@@ -59,8 +59,6 @@ GSEGame::~GSEGame()
 	delete m_Renderer;
 	m_Renderer = NULL;
 
-	
-
 	delete m_ObjectMgr;
 	m_ObjectMgr = NULL;
 
@@ -76,24 +74,27 @@ void GSEGame::DrawAll(float elapsedTime)
 	}
 }
 
-void GSEGame::KeyInput(GSEUserInterface* ui)
+void GSEGame::KeyInput(GSEUserInterface* ui, float elapsedTime)
 {
-	float vx, vy, vz;
-	vx = vy = vz = 0.f;
-	float velAmount = 100.f;
+
+	float x, y,z;
+	x = y = z = 0.f;
+	float forceAmount = 2000.f;
 	if (ui->Is_SP_Arrow_Up_Down()) {
-		vy += velAmount;
+		y += forceAmount;
 	}
 	if (ui->Is_SP_Arrow_Down_Down()) {
-		vy -= velAmount;
+		y -= forceAmount;
 	}
 	if (ui->Is_SP_Arrow_Right_Down()) {
-		vx += velAmount;
+		x += forceAmount;
 	}
 	if (ui->Is_SP_Arrow_Left_Down()) {
-		vx -= velAmount;
+		x -= forceAmount;
 	}
 
-	m_ObjectMgr->SetObjectVel(m_HeroID, vx, vy, vz);
-	
+	//m_ObjectMgr->SetObjectVel(m_HeroID, vx, vy, vz);
+	//add force
+	m_ObjectMgr->AddObjectForce(m_HeroID, x, y, z, elapsedTime);
+
 }

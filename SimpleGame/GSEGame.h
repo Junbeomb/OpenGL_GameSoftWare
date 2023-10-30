@@ -12,7 +12,7 @@ public:
 	~GSEGame();
 
 	void DrawAll(float elapsedTime); 
-	void KeyInput(GSEUserInterface* ui);
+	void KeyInput(GSEUserInterface* ui, float elapsedTime);
 
 private:
 	Renderer * m_Renderer;

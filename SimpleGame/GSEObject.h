@@ -16,6 +16,7 @@ public:
 	void SetForce(float x, float y, float z);
 	void Draw(Renderer* renderer);
 	void Update(float elapsedTime);
+	void AddForce(float x, float y, float z, float elapsedTime);
 
 private:
 	float m_sizeX, m_sizeY, m_sizeZ = 0.f;
