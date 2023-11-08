@@ -9,13 +9,25 @@ public:
 	~GSEObject();
 
 	void SetSize(float x, float y, float z);
+
 	void SetPos(float x, float y, float z);
+	void GetPos(float *x, float *y, float *z);
+
 	void SetMass(float mass);
+
 	void SetVel(float x, float y, float z);
+	void GetVel(float* x, float* y, float* z);
+
 	void SetAcc(float x, float y, float z);
+
 	void SetForce(float x, float y, float z);
+
+	void SetType(int type);
+
 	void Draw(Renderer* renderer);
+
 	void Update(float elapsedTime);
+
 	void AddForce(float x, float y, float z, float elapsedTime);
 
 private:

@@ -19,5 +19,7 @@ private:
 	GSEObjectMgr* m_ObjectMgr;
 
 	int m_HeroID = -1;
+
+	float m_gameTime = 0.f;
 };
 
