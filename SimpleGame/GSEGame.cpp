@@ -56,20 +56,22 @@ GSEGame::GSEGame(int windowSizeX, int windowSizeY)
 
 GSEGame::~GSEGame()
 {
+
 	delete m_Renderer;
 	m_Renderer = NULL;
 
 	delete m_ObjectMgr;
 	m_ObjectMgr = NULL;
 
-	
 }
 
 void GSEGame::DrawAll(float elapsedTime)
 {
 	//objmgr
-	if (m_Renderer != NULL) {
+	if (m_Renderer != NULL) 
+	{
 		m_ObjectMgr->UpdateAllObjects(elapsedTime);
+		m_ObjectMgr->DoGarbageCollect();
 		m_ObjectMgr->DrawAllObjects(m_Renderer, elapsedTime);
 	}
 

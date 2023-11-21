@@ -35,6 +35,7 @@ public:
 	bool DeleteObject(int id);
 	void DrawAllObjects(Renderer* renderer, float elapsedTime);
 	void UpdateAllObjects(float elapsedTime);
+	void DoGarbageCollect();
 
 private:
 	GSEObject* m_Objects[MAX_NUM_OBJECT];

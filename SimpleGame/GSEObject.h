@@ -17,12 +17,14 @@ public:
 
 	void SetVel(float x, float y, float z);
 	void GetVel(float* x, float* y, float* z);
+	float GetVelMag();
 
 	void SetAcc(float x, float y, float z);
 
 	void SetForce(float x, float y, float z);
 
 	void SetType(int type);
+	int GetType();
 
 	void Draw(Renderer* renderer);
 

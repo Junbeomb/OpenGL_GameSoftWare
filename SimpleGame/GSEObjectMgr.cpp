@@ -36,6 +36,7 @@ int GSEObjectMgr::AddObject(float posX, float posY, float posZ,
 		}
 	}
 
+
 	if (index >= 0) {
 		m_Objects[index] = new GSEObject();
 		m_Objects[index]->SetPos(posX, posY, posZ);
@@ -105,6 +106,31 @@ bool GSEObjectMgr::DeleteObject(int id)
 	std::cout << "Index " << id << " already deleted." << std::endl;
 	return false;
 }
+
+void GSEObjectMgr::DoGarbageCollect()
+{
+	//find garbage & delete it
+	for (int i = 0; i < MAX_NUM_OBJECT; ++i) {
+
+		if (m_Objects[i] != NULL) {
+			//Bullet garbage
+			int type = m_Objects[i]->GetType();
+
+			if (type == TYPE_BULLET) {
+			
+				float mag = m_Objects[i]->GetVelMag();
+
+				if (mag < FLT_EPSILON) {
+					//std::cout << i << "@@@" << std::endl;
+					DeleteObject(i);
+				}
+
+			}
+		}
+
+	}
+}
+
 
 void GSEObjectMgr::DrawAllObjects(Renderer* renderer, float elapsedTime)
 {
