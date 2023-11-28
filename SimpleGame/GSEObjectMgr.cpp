@@ -6,6 +6,7 @@ GSEObjectMgr::GSEObjectMgr()
 {
 	for (int i = 0; i < MAX_NUM_OBJECT; ++i) {
 		m_Objects[i] = NULL;
+		m_ObjectsOverlap[i] = false;
 	}
 }
 
@@ -85,6 +86,45 @@ void GSEObjectMgr::GetObjectPos(int id, float* x, float* y, float* z)
 	}
 }
 
+void GSEObjectMgr::SetCoolTime(int id, float coolTime)
+{
+	if (m_Objects[id] != NULL) {
+		m_Objects[id]->SetCoolTime(coolTime);
+	}
+	else {
+
+	}
+}
+
+float GSEObjectMgr::GetCoolTime(int id)
+{
+	if (m_Objects[id] != NULL) {
+		return m_Objects[id]->GetCoolTime();
+	}
+	else {
+		return 0.0f;
+	}
+}
+
+bool GSEObjectMgr::IsCooltimeExpired(int id)
+{
+	if (m_Objects[id] != NULL) {
+		return m_Objects[id]->IsCooltimeExpired();
+	}
+	else {
+		return false;
+	}
+}
+
+void GSEObjectMgr::ResetCooltime(int id)
+{
+	if (m_Objects[id] != NULL) {
+		return m_Objects[id]->ResetCooltime();
+	}
+	else {
+	}
+}
+
 void GSEObjectMgr::AddObjectForce(int id, float x, float y, float z, float elapsedTime)
 {
 	if (m_Objects[id] != NULL) {
@@ -129,6 +169,69 @@ void GSEObjectMgr::DoGarbageCollect()
 		}
 
 	}
+}
+
+void GSEObjectMgr::DoAllObjectsOverlapTest()
+{
+	memset(m_ObjectsOverlap, 0, sizeof(bool) * MAX_NUM_OBJECT);
+	for (int i = 0; i < MAX_NUM_OBJECT; ++i) {
+
+		for (int j = i + 1; j < MAX_NUM_OBJECT; j++) {
+			
+			bool isOverlap = BBOverlap(i, j);
+			if (isOverlap) {
+				m_ObjectsOverlap[i] = true;
+				m_ObjectsOverlap[j] = true;
+			}
+
+		}
+	}
+
+	//over laps
+	for (int i = 0; i < MAX_NUM_OBJECT; ++i) {
+		if (m_Objects[i] != NULL) {
+			if (m_ObjectsOverlap[i]) {
+				m_Objects[i]->SetColor(1, 0, 0, 1);
+			}
+			else {
+				m_Objects[i]->SetColor(1, 1, 1, 1);
+			}
+		}
+	}
+}
+
+bool GSEObjectMgr::BBOverlap(int srcID, int dstID)
+{
+	if (m_Objects[srcID] != NULL && m_Objects[dstID] != NULL) {
+
+		GSEObject* src = m_Objects[srcID];
+		GSEObject* dst = m_Objects[dstID];
+
+		float srcMinX, srcMinY, srcMinZ;
+		float srcMaxX, srcMaxY, srcMaxZ;
+		float dstMinX, dstMinY, dstMinZ;
+		float dstMaxX, dstMaxY, dstMaxZ;
+		src->GetBBMin(&srcMinX, &srcMinY,&srcMinZ);
+		src->GetBBMax(&srcMaxX, &srcMaxY,&srcMaxZ);
+		dst->GetBBMin(&dstMinX, &dstMinY, &dstMinZ);
+		dst->GetBBMax(&dstMaxX, &dstMaxY, &dstMaxZ);
+
+		if (srcMinX > dstMaxX)
+			return false;
+		if (srcMaxX < dstMinX)
+			return false;
+		if (srcMinY > dstMaxY)
+			return false;
+		if (srcMaxY < dstMinY)
+			return false;
+		if (srcMinZ > dstMaxZ)
+			return false;
+		if (srcMaxZ < dstMinZ)
+			return false;
+
+		return true;
+	}
+	return false;
 }
 
 

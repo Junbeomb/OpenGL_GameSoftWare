@@ -22,6 +22,11 @@ public:
 	void GetObjectVel(int id, float* vx, float* vy, float* vz);
 	void GetObjectPos(int id, float* x, float* y, float* z);
 
+	void SetCoolTime(int id, float coolTime);
+	float GetCoolTime(int id);
+	bool IsCooltimeExpired(int id);
+	void ResetCooltime(int id);
+
 	void AddObjectForce(int id, float x, float y, float z, float elapsedTime);
 
 	float m_sizeX, m_sizeY, m_sizeZ = 0.f;
@@ -36,8 +41,14 @@ public:
 	void DrawAllObjects(Renderer* renderer, float elapsedTime);
 	void UpdateAllObjects(float elapsedTime);
 	void DoGarbageCollect();
+	void DoAllObjectsOverlapTest();
 
 private:
+
+	bool BBOverlap(int srcID, int dstID);
+
 	GSEObject* m_Objects[MAX_NUM_OBJECT];
+
+	bool m_ObjectsOverlap[MAX_NUM_OBJECT];
 };
 
