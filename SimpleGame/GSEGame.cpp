@@ -16,7 +16,9 @@ GSEGame::GSEGame(int windowSizeX, int windowSizeY)
 		0, 0, 0,
 		0, 0, 0,
 		0, 0, 0,
-		TYPE_HERO);
+		TYPE_HERO,
+		2000,
+		-1);
 
 	//create test objects
 	for (int i = 0; i < 10; ++i) {
@@ -29,7 +31,7 @@ GSEGame::GSEGame(int windowSizeX, int windowSizeY)
 		float sY = 50.f * (float)rand() / (float)RAND_MAX;
 		float sZ = 1.f;
 
-		float mass = 1.f;
+		float mass =20.f;
 
 		float velX = (10.f * (float)rand() / (float)RAND_MAX) - 5.f;
 		float velY = (10.f * (float)rand() / (float)RAND_MAX) - 5.f;
@@ -49,7 +51,9 @@ GSEGame::GSEGame(int windowSizeX, int windowSizeY)
 			velX, velY, velZ,
 			accX, accY, accZ,
 			forceX, forceY, forceZ,
-			TYPE_DEFAULT);
+			TYPE_DEFAULT,
+			100,
+			-1);
 
 	}
 }
@@ -133,7 +137,9 @@ void GSEGame::KeyInput(GSEUserInterface* ui, float elapsedTime)
 				newBX, newBY, 0,
 				0, 0, 0,
 				0, 0, 0,
-				TYPE_BULLET);
+				TYPE_BULLET,
+				40,
+				m_HeroID);
 
 			/*if (mag > FLT_EPSILON) {
 

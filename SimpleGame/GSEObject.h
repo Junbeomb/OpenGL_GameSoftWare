@@ -14,6 +14,7 @@ public:
 	void GetPos(float *x, float *y, float *z);
 
 	void SetMass(float mass);
+	float GetMass();
 
 	void SetVel(float x, float y, float z);
 	void GetVel(float* x, float* y, float* z);
@@ -29,6 +30,14 @@ public:
 
 	void GetBBMin(float* x, float* y, float* z);
 	void GetBBMax(float* x, float* y, float* z);
+
+	void SetID(int id);
+	int GetID();
+	void SetParent(int id);
+	bool isAncestor(int id);
+
+	void SetHP(float hp);
+	float GetHP();
 
 	void SetCoolTime(float coolTime);
 	float GetCoolTime();
@@ -55,6 +64,11 @@ private:
 	float m_coolTime = 1.f;
 	float m_remainCoolTime = 1.f;
 	bool m_isCoolTimeExpired = false;
+
+	int m_ID = -1;
+	int m_parentID = -1;
+
+	float m_HP = 0;
 
 };
 

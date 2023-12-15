@@ -16,7 +16,9 @@ public:
 							float velX, float velY, float velZ,
 							float accX, float accY, float accZ,
 							float forceX, float forceY, float forceZ,
-							int type);
+							int type,
+							float HP,
+						int ancestor);
 
 	void SetObjectVel(int id, float vx, float vy, float vz);
 	void GetObjectVel(int id, float* vx, float* vy, float* vz);
@@ -46,6 +48,8 @@ public:
 private:
 
 	bool BBOverlap(int srcID, int dstID);
+	void CollisionProcessing(int srcID, int dstID);
+
 
 	GSEObject* m_Objects[MAX_NUM_OBJECT];
 
